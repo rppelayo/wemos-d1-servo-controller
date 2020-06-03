@@ -71,14 +71,15 @@ void setup(void) {
   Serial.println("HTTP server started");
 }
 
+//function for handling POST data
 void dataHandler(){
-  String angle = server.arg("plain");
-  Serial.print("Received: ");
+  String angle = server.arg("plain");    //angle from POST data
+  Serial.print("Received: ");            //print to serial terminal
   Serial.println(angle);
-  server.sendHeader("Location","/");
-  server.send(303);
-  int pos = angle.toInt();
-  myservo.write(pos);
+  server.sendHeader("Location","/");     //redirect client to home page
+  server.send(303);                      //redirect http code
+  int pos = angle.toInt();               //received angle is string so convert to integer
+  myservo.write(pos);                    //move servo to received angle
   delay(100);
 }
 
